@@ -1,22 +1,5 @@
 #include<stdio.h>
 #include<stdlib.h>
-
-void msort(int arr[] , int l , int r);
-void merge(int arr[] , int p , int q, int r);
-
-void msort(int arr[],int l , int r)
-{
-    if(l<r)
-    {
-        int m = l+(r-l)/2;
-        
-        msort(arr,l,m);
-        msort(arr,m+1,r);
-        
-        merge(arr,l,m,r);
-    }
-}
-
 void merge(int arr[],int p, int q, int r)
 {
     int n1 = q-p+1;
@@ -63,33 +46,37 @@ void merge(int arr[],int p, int q, int r)
         k++;
     }
 }
-
+void msort(int arr[],int l , int r)
+{
+    if(l<r)
+    {
+        int m=(l+r)/2;
+        msort(arr,l,m);
+        msort(arr,m+1,r);
+        merge(arr,l,m,r);
+    }
+}
 int main()
 {
     int n,i;
-    
     printf("enter the number:");
-    scanf("%d",&n);
-    
+    scanf("%d",&n); 
     int arr[n];
     printf("enter the elements:");
     for(i=0;i<n;i++)
     {
         scanf("%d",&arr[i]);
     }
-    
     printf("origianl array:");
     for(i=0;i<n;i++)
     {
-        printf("%d\n",arr[i]);
+        printf("%d ",arr[i]);
     }
-    printf("-----------");
-    
+    printf("\n-----------"); 
     msort(arr,0,n-1);
-    printf("origianl array:");
+    printf("\norigianl array:");
     for(i=0;i<n;i++)
     {
-        printf("%d \n",arr[i]);
-    }
-    
+        printf("%d  ",arr[i]);
+    }  
 }
